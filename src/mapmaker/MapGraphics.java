@@ -40,9 +40,12 @@ public class MapGraphics implements MapViewer {
     map.notifyOfChange(MapEvent.ChangeView);
   } // setPaintSize
 
-  public void setVirtualStateController(StateController state) {
-    virtualState = state;
-  } // setVirtualStateController
+    public void setVirtualStateController(StateController state) {
+        if (state == null) {
+            throw new IllegalArgumentException("StateController must not be null");
+        }
+        virtualState = state;
+    } // setVirtualStateController
 
   public int getPaintSize() {
     return paintSize;
