@@ -1,7 +1,6 @@
 package mapmaker;
 
 import java.awt.*;
-import java.lang.*;
 import java.util.*;
 
 import mapmaker.mapcmd.*;
