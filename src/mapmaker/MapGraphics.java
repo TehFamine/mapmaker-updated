@@ -357,6 +357,15 @@ public class MapGraphics implements MapViewer {
       g.drawLine(p1.x, p1.y, p2.x, p2.y); // Draw direct line if alternatives are invalid
   } // connectPoints
 
+    private boolean connectWithMiddle(Point p1, int exit1, Point p2, int exit2, Point middle) {
+        if (validConnect(p1, middle, exit1) && validConnect(p2, middle, exit2)) {
+            g.drawLine(p1.x, p1.y, middle.x, middle.y);
+            g.drawLine(p2.x, p2.y, middle.x, middle.y);
+            return true;
+        }
+        return false;
+    } // connectWithMiddle
+
   Point mapPos(Point screenPos) {
     // returns the map-position of the room that covers 
     // screenPos when painted
