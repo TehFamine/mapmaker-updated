@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class CDirFilter
   implements DirFilter {
 
-  private boolean[] acceptFlags = new boolean[Dir.DIRNR];
+  private final boolean[] acceptFlags = new boolean[Dir.DIRNR];
 
   /** accepts all or nothing, depending on initState
    * @param initState returned by accept unless changed
