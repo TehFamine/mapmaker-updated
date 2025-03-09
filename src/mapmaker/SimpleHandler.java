@@ -70,7 +70,7 @@ public class SimpleHandler extends MapEventHandler {
 
   /** @param pressed the map position of the room where the
    * mousekey was pressed down
-   * @param and where it was released
+   * @param e where it was released
    */
   public void roomDragged(MouseEvent e, Point pressed, Point released) {
     if (!e.isMetaDown()) { // left click

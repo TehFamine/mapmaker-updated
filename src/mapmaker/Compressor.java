@@ -11,7 +11,7 @@ public class Compressor {
    * element equal to -1 if none of the old elements got transfered
    * to this position, or equal to that element's previous index 
    * in the given array otherwise
-   * @param compressable is of length of the old array, indicates for
+   * @param removable is of length of the old array, indicates for
    * each element wether it's allowed to be removed or not
    * @param size the size the new array should have if possible
    */
