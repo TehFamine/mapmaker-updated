@@ -49,7 +49,7 @@ public class MapMaker {
     menuItem = new JMenuItem("Save", KeyEvent.VK_S);
     menuItem.addActionListener(new SaveAction());
     menuItem.setAccelerator(
-      KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));    
+      KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
     menu.add(menuItem);
     menuItem = new JMenuItem("Save as", KeyEvent.VK_A);
     menuItem.addActionListener(new SaveAsAction());
@@ -58,7 +58,7 @@ public class MapMaker {
     menuItem = new JMenuItem("Exit", KeyEvent.VK_X);
     menuItem.addActionListener(new ExitAction());
     menuItem.setAccelerator(
-      KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.ALT_MASK));    
+      KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.ALT_DOWN_MASK));
     menu.add(menuItem);
 
     // create edit menu
