@@ -2,8 +2,6 @@ package mapmaker;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-
 import util.*;
 
 /** the View in mapmaker's MVC pattern
@@ -18,10 +16,10 @@ public class MapGraphics implements MapViewer {
 
   int paintSize = 4;
   // must never be null
-  StateController virtualState = 
-    new ConstStateController(new Boolean(false));
-  
-  /** @param map the Model
+  StateController virtualState =
+          new ConstStateController(Boolean.FALSE);
+
+    /** @param map the Model
    * @param meh the Controller
    */
   public MapGraphics(AreaMap map, MapEventHandler meh) {
@@ -40,45 +38,59 @@ public class MapGraphics implements MapViewer {
     map.notifyOfChange(MapEvent.ChangeView);
   } // setPaintSize
 
-  public void setVirtualStateController(StateController state) {
-    virtualState = state;
-  } // setVirtualStateController
+    public void setVirtualStateController(StateController state) {
+        if (state == null) {
+            throw new IllegalArgumentException("StateController must not be null");
+        }
+        virtualState = state;
+    } // setVirtualStateController
 
   public int getPaintSize() {
     return paintSize;
   } // getPaintSize
 
-  public void paint(Graphics g) {
-    // set current Graphics object
-    this.g = g;
-    // only draw if rooms and links lie within the visible area
-    // translate visible area into map coordinates
-    Rectangle bounds = g.getClipBounds();
-    if (bounds == null)
-      mapBounds = new Rectangle(map.getSize());
-    else {
-      int sizePerRoom = sizePerRoom();
-      int mapMinX = bounds.x / sizePerRoom;
-      int mapMinY = bounds.y / sizePerRoom;
-      // mapMaxX and mapMaxY are exclusive
-      int mapMaxX = (bounds.x + bounds.width) / sizePerRoom + 1;
-      int mapMaxY = (bounds.y + bounds.height) / sizePerRoom + 1;
-      mapBounds = 
-	new Rectangle(mapMinX, mapMinY, mapMaxX - mapMinX, mapMaxY - mapMinY);
-    }
-    // paint rooms
-    Room[] rooms = map.getRooms();
-    for (int i = 0; i < rooms.length; i++)
-      paintRoom(rooms[i]);
-    // paint links
-    Link[] links = map.getLinks();
-    for (int i = 0; i < links.length; i++)
-      paintLink(links[i]);
-    // paint selected room if there is one
-    Room selected = map.getSelected();
-    if (selected != null)
-      paintSelectedRoom(selected);
-  } // paint
+    @Override
+    public void paint (Graphics g) {
+
+        this.g = g;
+
+        // Restrict drawing to the visible area
+        Rectangle bounds = g.getClipBounds();
+        if (bounds == null) {
+            mapBounds = new Rectangle(map.getSize());
+        } else {
+            int sizePerRoom = sizePerRoom();
+            int mapMinX = bounds.x / sizePerRoom;
+            int mapMinY = bounds.y / sizePerRoom;
+            int mapMaxX = (bounds.x + bounds.width) / sizePerRoom + 1;
+            int mapMaxY = (bounds.y + bounds.height) / sizePerRoom + 1;
+            mapBounds = new Rectangle(mapMinX, mapMinY,
+                    mapMaxX - mapMinX,
+                    mapMaxY - mapMinY);
+        }
+
+        // Paint rooms
+        Room[] rooms = map.getRooms();
+        if (rooms != null) {
+            for (Room room : rooms) {
+                paintRoom(room);
+            }
+        }
+
+        // Paint links
+        Link[] links = map.getLinks();
+        if (links != null) {
+            for (Link link : links) {
+                paintLink(link);
+            }
+        }
+
+        // Paint selected room if it exists
+        Room selected = map.getSelected();
+        if (selected != null) {
+            paintSelectedRoom(selected);
+        }
+    } // paint
 
   int roomSquareSize() {
     // returns the size of the square that holds a room
@@ -180,7 +192,7 @@ public class MapGraphics implements MapViewer {
       g.setColor(roomColor);
 
     if (room instanceof VirtualRoom) {
-      if (((Boolean)virtualState.state()).booleanValue())
+      if ((Boolean) virtualState.state())
 	drawEdges(start.x, start.y, roomSize - 1, roomSize - 1);
     }
     else
@@ -329,26 +341,30 @@ public class MapGraphics implements MapViewer {
   /** connects the given points, respecting the exits they come from
    */
   void connectPoints(Point p1, int exit1, Point p2, int exit2) {
-    // if the direct connection would be at an invalid angle,
-    // try to use two connection lines
-    if (!validConnect(p1, p2, exit1) || 
-	!validConnect(p2, p1, exit2)) {
-      // try to get a valid connection by connecting with two lines
-      Point middle = new Point(p1.x, p2.y);
-      // if middle not valid, try other middle point
-      if (!validConnect(p1, middle, exit1) ||
-	  !validConnect(p2, middle, exit2))
-	middle = new Point(p2.x, p1.y);
-      // if now valid, draw two lines and return
-      if (validConnect(p1, middle, exit1) &&
-	  validConnect(p2, middle, exit2)) {
-	g.drawLine(p1.x, p1.y, middle.x, middle.y);
-	g.drawLine(p2.x, p2.y, middle.x, middle.y);
-	return;
+      if (p1 == null || p2 == null) {
+          throw new IllegalArgumentException("Points cannot be null");
       }
-    }
-    g.drawLine(p1.x, p1.y, p2.x, p2.y);
+
+      if (!validConnect(p1, p2, exit1) || !validConnect(p2, p1, exit2)) {
+          Point middle = new Point(p1.x, p2.y);
+          if (!connectWithMiddle(p1, exit1, p2, exit2, middle)) {
+              middle = new Point(p2.x, p1.y);
+              if (connectWithMiddle(p1, exit1, p2, exit2, middle)) {
+                  return;
+              }
+          }
+      }
+      g.drawLine(p1.x, p1.y, p2.x, p2.y); // Draw direct line if alternatives are invalid
   } // connectPoints
+
+    private boolean connectWithMiddle(Point p1, int exit1, Point p2, int exit2, Point middle) {
+        if (validConnect(p1, middle, exit1) && validConnect(p2, middle, exit2)) {
+            g.drawLine(p1.x, p1.y, middle.x, middle.y);
+            g.drawLine(p2.x, p2.y, middle.x, middle.y);
+            return true;
+        }
+        return false;
+    } // connectWithMiddle
 
   Point mapPos(Point screenPos) {
     // returns the map-position of the room that covers 
@@ -387,12 +403,12 @@ public class MapGraphics implements MapViewer {
     MouseListener ml =  new MouseAdapter() {
 	
 	Point mousePressedPos = new Point(0,0);
-	
+
 	private boolean inScreen(Point pos) {
 	  // returns wether pos lies within the visible range of
 	  // the map
-	  return AwtUtil.contains(getSize(), pos);
-	} // inScreen
+        return pos != null && AwtUtil.contains(getSize(), pos);
+    } // inScreen
 	
 	public void mouseClicked(MouseEvent e) {
 	  if (!inScreen(e.getPoint()))
@@ -441,7 +457,7 @@ public class MapGraphics implements MapViewer {
 
     speaker.addKeyListener(new KeyAdapter() {
 
-        MouseLocator mouser = mouseLocator;
+        final MouseLocator mouser = mouseLocator;
 
         // use keyReleased, not keyTyped, as not all keys
 	// generate a keyTyped event!!!

@@ -1,17 +1,18 @@
 package mapmaker;
 
+import java.util.Arrays;
+
 public class CDirFilter
   implements DirFilter {
 
-  private boolean[] acceptFlags = new boolean[Dir.DIRNR];
+  private final boolean[] acceptFlags = new boolean[Dir.DIRNR];
 
   /** accepts all or nothing, depending on initState
    * @param initState returned by accept unless changed
    * with setAccept
    */
   public CDirFilter(boolean initState) {
-    for (int i = 0; i < Dir.DIRNR; i++)
-      acceptFlags[i] = initState;
+      Arrays.fill(acceptFlags, initState);
   } // CDirFilter
 
   /** initially accepts all
