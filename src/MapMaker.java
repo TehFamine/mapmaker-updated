@@ -205,6 +205,9 @@ public class MapMaker {
     menuItem.addActionListener(
       new MapConvertAction(new OlcConverter(), "olc"));
     menu.add(menuItem);
+    menuItem.addActionListener(
+            new MapConvertAction(new EvenniaBatchConverter(), "evbatch"));
+    menu.add(menuItem);
 
     // create help menu
     menu = new JMenu("Help");
