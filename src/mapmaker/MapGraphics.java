@@ -453,7 +453,7 @@ public class MapGraphics implements MapViewer {
 
     speaker.addKeyListener(new KeyAdapter() {
 
-        MouseLocator mouser = mouseLocator;
+        final MouseLocator mouser = mouseLocator;
 
         // use keyReleased, not keyTyped, as not all keys
 	// generate a keyTyped event!!!
