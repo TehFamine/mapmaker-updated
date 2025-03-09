@@ -46,7 +46,7 @@ public class RomConverter
    */
   public Text mapToText(AreaMap map, int startVnum, String fileName) {
     Room[] rooms = map.getRooms();
-    NoEqualValuesMap roomVnums = 
+    NoEqualValuesMap roomVnums =
       RomConverterTool.assignVnums(rooms, startVnum);
     Text out = new Text();
     
@@ -58,7 +58,7 @@ public class RomConverter
     String areaName = "noname";
     if (map instanceof DescObj) {
       String mapName = MapDescParser.get().getName(((DescObj)map).getDesc());
-      if (mapName.length() > 0)
+      if (!mapName.isEmpty())
 	areaName = mapName;
     }
     out.append(areaName + STRING_TERM);
