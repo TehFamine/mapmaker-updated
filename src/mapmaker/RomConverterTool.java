@@ -1,9 +1,4 @@
 package mapmaker;
-
-import java.util.*;
-import javax.swing.*;
-import java.io.*;
-
 import util.*;
 
 /** a tool for converting a map into other formats (ROM)
