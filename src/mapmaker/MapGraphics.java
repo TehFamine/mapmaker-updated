@@ -2,8 +2,6 @@ package mapmaker;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-
 import util.*;
 
 /** the View in mapmaker's MVC pattern
