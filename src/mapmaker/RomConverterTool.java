@@ -29,7 +29,7 @@ public class RomConverterTool {
      * returns an array of all sector names
      */
     public static String[] getSectorNames() {
-        return (String[]) sectorNames.clone();
+        return sectorNames.clone();
     } // getSectornames
 
     /**
