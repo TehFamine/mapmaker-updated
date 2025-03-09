@@ -49,37 +49,48 @@ public class MapGraphics implements MapViewer {
     return paintSize;
   } // getPaintSize
 
-  public void paint(Graphics g) {
-    // set current Graphics object
-    this.g = g;
-    // only draw if rooms and links lie within the visible area
-    // translate visible area into map coordinates
-    Rectangle bounds = g.getClipBounds();
-    if (bounds == null)
-      mapBounds = new Rectangle(map.getSize());
-    else {
-      int sizePerRoom = sizePerRoom();
-      int mapMinX = bounds.x / sizePerRoom;
-      int mapMinY = bounds.y / sizePerRoom;
-      // mapMaxX and mapMaxY are exclusive
-      int mapMaxX = (bounds.x + bounds.width) / sizePerRoom + 1;
-      int mapMaxY = (bounds.y + bounds.height) / sizePerRoom + 1;
-      mapBounds = 
-	new Rectangle(mapMinX, mapMinY, mapMaxX - mapMinX, mapMaxY - mapMinY);
-    }
-    // paint rooms
-    Room[] rooms = map.getRooms();
-    for (int i = 0; i < rooms.length; i++)
-      paintRoom(rooms[i]);
-    // paint links
-    Link[] links = map.getLinks();
-    for (int i = 0; i < links.length; i++)
-      paintLink(links[i]);
-    // paint selected room if there is one
-    Room selected = map.getSelected();
-    if (selected != null)
-      paintSelectedRoom(selected);
-  } // paint
+    @Override
+    public void paint (Graphics g) {
+
+        this.g = g;
+
+        // Restrict drawing to the visible area
+        Rectangle bounds = g.getClipBounds();
+        if (bounds == null) {
+            mapBounds = new Rectangle(map.getSize());
+        } else {
+            int sizePerRoom = sizePerRoom();
+            int mapMinX = bounds.x / sizePerRoom;
+            int mapMinY = bounds.y / sizePerRoom;
+            int mapMaxX = (bounds.x + bounds.width) / sizePerRoom + 1;
+            int mapMaxY = (bounds.y + bounds.height) / sizePerRoom + 1;
+            mapBounds = new Rectangle(mapMinX, mapMinY,
+                    mapMaxX - mapMinX,
+                    mapMaxY - mapMinY);
+        }
+
+        // Paint rooms
+        Room[] rooms = map.getRooms();
+        if (rooms != null) {
+            for (Room room : rooms) {
+                paintRoom(room);
+            }
+        }
+
+        // Paint links
+        Link[] links = map.getLinks();
+        if (links != null) {
+            for (Link link : links) {
+                paintLink(link);
+            }
+        }
+
+        // Paint selected room if it exists
+        Room selected = map.getSelected();
+        if (selected != null) {
+            paintSelectedRoom(selected);
+        }
+    } // paint
 
   int roomSquareSize() {
     // returns the size of the square that holds a room
