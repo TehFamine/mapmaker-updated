@@ -1,5 +1,7 @@
 package mapmaker;
 
+import java.util.Arrays;
+
 public class CDirFilter
   implements DirFilter {
 
@@ -10,8 +12,7 @@ public class CDirFilter
    * with setAccept
    */
   public CDirFilter(boolean initState) {
-    for (int i = 0; i < Dir.DIRNR; i++)
-      acceptFlags[i] = initState;
+      Arrays.fill(acceptFlags, initState);
   } // CDirFilter
 
   /** initially accepts all
