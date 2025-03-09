@@ -2,7 +2,6 @@ package mapmaker;
 
 import java.util.*;
 import java.awt.*;
-import java.lang.*;
 
 import mapmaker.mapcmd.*;
 import util.*;
@@ -187,7 +186,7 @@ public class CMap
   public Point getRoomPos(Room room) {
     // use Hashtable to speed things up
     // check for invalid hashtable too
-    Point pos = (Point)roomPos.get(room);
+    Point pos = roomPos.get(room);
     // use a clone to ensure that memorized object stays constant
     pos = new Point(pos.x, pos.y);
     return pos;
