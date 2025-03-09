@@ -1,7 +1,5 @@
 package mapmaker.mapcmd;
 
-import java.awt.*;
-
 import util.*;
 
 public class CmdSetDesc implements MapCommand {

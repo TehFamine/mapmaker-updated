@@ -1,6 +1,5 @@
 package mapmaker;
 
-import java.util.*;
 import util.*;
 
 public class DescParser {

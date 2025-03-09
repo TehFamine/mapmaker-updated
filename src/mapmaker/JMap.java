@@ -2,7 +2,6 @@ package mapmaker;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 
 /** a wrapper for the View of mapmaker's MVC pattern
