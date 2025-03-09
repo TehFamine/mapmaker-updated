@@ -205,6 +205,14 @@ public class MapMaker {
     menuItem.addActionListener(
       new MapConvertAction(new OlcConverter(), "olc"));
     menu.add(menuItem);
+
+    menu = new JMenu("Evennia");
+    menu.setMnemonic(KeyEvent.VK_E);
+    menuBar.add(menu);
+    // create menu items
+    menuItem = new JMenuItem("Create Evennia Batch", KeyEvent.VK_E);
+    menuItem.setAccelerator(
+            KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
     menuItem.addActionListener(
             new MapConvertAction(new EvenniaBatchConverter(), "evbatch"));
     menu.add(menuItem);
