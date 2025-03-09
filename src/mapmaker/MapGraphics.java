@@ -341,25 +341,20 @@ public class MapGraphics implements MapViewer {
   /** connects the given points, respecting the exits they come from
    */
   void connectPoints(Point p1, int exit1, Point p2, int exit2) {
-    // if the direct connection would be at an invalid angle,
-    // try to use two connection lines
-    if (!validConnect(p1, p2, exit1) || 
-	!validConnect(p2, p1, exit2)) {
-      // try to get a valid connection by connecting with two lines
-      Point middle = new Point(p1.x, p2.y);
-      // if middle not valid, try other middle point
-      if (!validConnect(p1, middle, exit1) ||
-	  !validConnect(p2, middle, exit2))
-	middle = new Point(p2.x, p1.y);
-      // if now valid, draw two lines and return
-      if (validConnect(p1, middle, exit1) &&
-	  validConnect(p2, middle, exit2)) {
-	g.drawLine(p1.x, p1.y, middle.x, middle.y);
-	g.drawLine(p2.x, p2.y, middle.x, middle.y);
-	return;
+      if (p1 == null || p2 == null) {
+          throw new IllegalArgumentException("Points cannot be null");
       }
-    }
-    g.drawLine(p1.x, p1.y, p2.x, p2.y);
+
+      if (!validConnect(p1, p2, exit1) || !validConnect(p2, p1, exit2)) {
+          Point middle = new Point(p1.x, p2.y);
+          if (!connectWithMiddle(p1, exit1, p2, exit2, middle)) {
+              middle = new Point(p2.x, p1.y);
+              if (connectWithMiddle(p1, exit1, p2, exit2, middle)) {
+                  return;
+              }
+          }
+      }
+      g.drawLine(p1.x, p1.y, p2.x, p2.y); // Draw direct line if alternatives are invalid
   } // connectPoints
 
   Point mapPos(Point screenPos) {
