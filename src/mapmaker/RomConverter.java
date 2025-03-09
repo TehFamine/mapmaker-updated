@@ -61,8 +61,8 @@ public class RomConverter
     out.append("{?? ??} MapMaker " + areaName + STRING_TERM);
     // get maximum vnum -> area vnums
     int maxVnum = 0;
-      for (Object o : roomVnums.values()) {
-          int vnum = (Integer) o;
+      for (Integer o : roomVnums.values()) {
+          int vnum = o;
           if (vnum > maxVnum)
               maxVnum = vnum;
       }
