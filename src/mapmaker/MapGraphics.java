@@ -18,10 +18,10 @@ public class MapGraphics implements MapViewer {
 
   int paintSize = 4;
   // must never be null
-  StateController virtualState = 
-    new ConstStateController(new Boolean(false));
-  
-  /** @param map the Model
+  StateController virtualState =
+          new ConstStateController(Boolean.FALSE);
+
+    /** @param map the Model
    * @param meh the Controller
    */
   public MapGraphics(AreaMap map, MapEventHandler meh) {
