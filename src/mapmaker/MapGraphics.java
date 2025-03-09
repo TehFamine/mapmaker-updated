@@ -399,12 +399,12 @@ public class MapGraphics implements MapViewer {
     MouseListener ml =  new MouseAdapter() {
 	
 	Point mousePressedPos = new Point(0,0);
-	
+
 	private boolean inScreen(Point pos) {
 	  // returns wether pos lies within the visible range of
 	  // the map
-	  return AwtUtil.contains(getSize(), pos);
-	} // inScreen
+        return pos != null && AwtUtil.contains(getSize(), pos);
+    } // inScreen
 	
 	public void mouseClicked(MouseEvent e) {
 	  if (!inScreen(e.getPoint()))
