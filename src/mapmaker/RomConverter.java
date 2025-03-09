@@ -30,15 +30,15 @@ public class RomConverter
    * the given room as needed in ROM area file
    */
   protected String getRomRoomFlags(Room room) {
-    String flagString = "";
+    StringBuilder flagString = new StringBuilder();
     boolean[] flags = RomConverterTool.getRoomFlags(room);
     for (int i = 0; i < ROM_FLAG_NAMES.length; i++)
       if (flags[i])
-	flagString += ROM_FLAG_NAMES[i];
-    if (flagString.length() == 0)
+	flagString.append(ROM_FLAG_NAMES[i]);
+    if (flagString.isEmpty())
       return "0";
     else
-      return flagString;
+      return flagString.toString();
   } // getRomRoomFlags
 
   /** converts the given map into an array of strings that
