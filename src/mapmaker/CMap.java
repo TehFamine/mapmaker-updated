@@ -125,7 +125,6 @@ public class CMap
     }
     if (cmd instanceof CmdSetDesc) {
       setDesc(((CmdSetDesc)cmd).desc);
-      return;
     }
   } // executeWithoutNotify
 

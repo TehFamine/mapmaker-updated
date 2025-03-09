@@ -49,9 +49,9 @@ public class SimpleHandler extends MapEventHandler {
 	// copy room description
 	Room source = map.getSelected();
 	Room target = map.getRoom(pos);
-	if (target != null && source != target &&
-	    target instanceof DescObj) {
-	  if (source == null || !(source instanceof DescObj))
+	if (source != target &&
+            target instanceof DescObj) {
+	  if (!(source instanceof DescObj))
 	    ((DescObj)target).setDesc(null);
 	  else
 	    ((DescObj)target).setDesc(((DescObj)source).getDesc());
@@ -164,7 +164,6 @@ public class SimpleHandler extends MapEventHandler {
     }
     if (e.getKeyCode() == KeyEvent.VK_V) {
       map.execute(new CmdNewRoom(pos, MapFactory.type_VirtualRoom));
-      return;
     }
   } // keyTypedOnRoom
 

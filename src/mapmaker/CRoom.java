@@ -1,7 +1,6 @@
 package mapmaker;
 
 import java.awt.*;
-import java.lang.*;
 import java.util.*;
 
 import mapmaker.mapcmd.*;
@@ -54,7 +53,6 @@ public class CRoom
     }
     if (cmd instanceof RCmdSetColor) {
       setColor(((RCmdSetColor)cmd).color);
-      return;
     }
   } // execute
 
