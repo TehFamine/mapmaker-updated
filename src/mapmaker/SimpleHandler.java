@@ -17,9 +17,9 @@ public class SimpleHandler extends MapEventHandler {
 
   AreaMap map;
   NodeCollector collector;
-  StateController 
-    dragState = new ConstStateController(new Boolean(true)),
-    linkState = dragState;
+  StateController
+          dragState = new ConstStateController(true),
+          linkState = dragState;
 
   /** @param map the map to be controlled
    */
