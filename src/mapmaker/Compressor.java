@@ -61,7 +61,7 @@ public class Compressor {
     if (maxSkip < 0)
       maxSkip = 0;
     // pos = min(maxSkip, firstPos)
-    int pos = maxSkip < firstPos ? maxSkip : firstPos;
+    int pos = Math.min(maxSkip, firstPos);
     // start coppying positions at pos, copy removable positions
     // until maxRemovable reached
     int removed = 0;
