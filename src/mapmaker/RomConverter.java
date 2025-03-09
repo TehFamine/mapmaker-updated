@@ -41,7 +41,7 @@ public class RomConverter
    */
   public Text mapToText(AreaMap map, int startVnum, String fileName) {
     Room[] rooms = map.getRooms();
-    NoEqualValuesMap roomVnums =
+    NoEqualValuesMap<Room, Integer> roomVnums =
       RomConverterTool.assignVnums(rooms, startVnum);
     Text out = new Text();
     
