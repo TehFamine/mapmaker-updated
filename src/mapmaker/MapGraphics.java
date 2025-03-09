@@ -192,7 +192,7 @@ public class MapGraphics implements MapViewer {
       g.setColor(roomColor);
 
     if (room instanceof VirtualRoom) {
-      if (((Boolean)virtualState.state()).booleanValue())
+      if ((Boolean) virtualState.state())
 	drawEdges(start.x, start.y, roomSize - 1, roomSize - 1);
     }
     else
