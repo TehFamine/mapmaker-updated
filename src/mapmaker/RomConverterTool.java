@@ -36,7 +36,7 @@ public class RomConverterTool {
      * returns an array of all room flag commands
      */
     public static String[] getRoomFlagCommands() {
-        return (String[]) ROOM_FLAG_CMDS.clone();
+        return ROOM_FLAG_CMDS.clone();
     } // getRoomFlagCommands
 
     /**
