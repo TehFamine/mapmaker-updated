@@ -49,7 +49,7 @@ public class MapMaker {
     menuItem = new JMenuItem("Save", KeyEvent.VK_S);
     menuItem.addActionListener(new SaveAction());
     menuItem.setAccelerator(
-      KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));    
+      KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
     menu.add(menuItem);
     menuItem = new JMenuItem("Save as", KeyEvent.VK_A);
     menuItem.addActionListener(new SaveAsAction());
@@ -58,7 +58,7 @@ public class MapMaker {
     menuItem = new JMenuItem("Exit", KeyEvent.VK_X);
     menuItem.addActionListener(new ExitAction());
     menuItem.setAccelerator(
-      KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.ALT_MASK));    
+      KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.ALT_DOWN_MASK));
     menu.add(menuItem);
 
     // create edit menu
@@ -204,6 +204,18 @@ public class MapMaker {
     menuItem = new JMenuItem("Create OLC code", KeyEvent.VK_O);
     menuItem.addActionListener(
       new MapConvertAction(new OlcConverter(), "olc"));
+    menu.add(menuItem);
+
+    // create Evennia menu
+    menu = new JMenu("Evennia");
+    menu.setMnemonic(KeyEvent.VK_E);
+    menuBar.add(menu);
+    // create menu items
+    menuItem = new JMenuItem("Create Evennia Batch", KeyEvent.VK_E);
+    menuItem.setAccelerator(
+            KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
+    menuItem.addActionListener(
+            new MapConvertAction(new EvenniaBatchConverter(), "evbatch"));
     menu.add(menuItem);
 
     // create help menu
