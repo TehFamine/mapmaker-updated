@@ -206,6 +206,7 @@ public class MapMaker {
       new MapConvertAction(new OlcConverter(), "olc"));
     menu.add(menuItem);
 
+    // create Evennia menu
     menu = new JMenu("Evennia");
     menu.setMnemonic(KeyEvent.VK_E);
     menuBar.add(menu);
