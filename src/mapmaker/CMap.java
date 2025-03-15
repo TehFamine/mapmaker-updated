@@ -24,7 +24,7 @@ public class CMap
   /** @param sizeX the number of rooms stored in width
    * @param sizeY you figure it out ;)
    */
-  public CMap(int sizeX, int sizeY, Observable obs) {
+  public CMap (int sizeX, int sizeY, Observable obs) {
     rooms = new Room[sizeX][sizeY];
     roomPos = new Hashtable<Room,Point>(sizeX * sizeY);
     links = new Link[0]; // not links = null !!!
@@ -382,7 +382,7 @@ public class CMap
    * reduces size to the minimum size possible without performing
    * such deletions
    */
-  protected void setSize(Dimension dim) {
+  public void setSize(Dimension dim) {
     Dimension oldDim = getSize();
     // check which columns and rows are empty
     boolean[] rowEmpty = new boolean[oldDim.height];

@@ -21,6 +21,7 @@ public class JMap extends JPanel implements Observer {
     map.addObserver(this);
     mv.addListeners(this);
     size = mv.getSize();
+    setBackground(new Color(241, 234, 234));
     setOpaque(true);
   } // JMap
 
