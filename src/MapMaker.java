@@ -260,7 +260,7 @@ public class MapMaker {
 
     // set up loadSaveFile
     loadSaveFile = new FileWrapper();
-    loadSaveFile.addObserver(new FileTitleHandler(frame, "MapMaker"));
+    loadSaveFile.addObserver(new FileTitleHandler(frame, "MapMaker - v2.5.0"));
     // set up fileChooser
     loadSaveFileChooser = createFileChooser();
     loadSaveFile.addObserver(new FileChooserSynchronizer(loadSaveFileChooser));
